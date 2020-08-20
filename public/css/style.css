@@ -1,0 +1,30 @@
+body{background-color: lavenderblush;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+/* h1{ 
+padding-left: 15em;} */
+.space{
+    padding: 9px;
+    margin: 0.25em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.button{padding: 15px 32px;
+    font-size: 16px;}
+    .space input[type="button"] {
+	background-color : dodgerblue;
+	padding: 15px 32px;
+    font-size: 16px;
+    border-radius: 1em;}
+
+.container{
+ width: 400px;
+ height: 400px;
+ background: #fff;
+ top: 40%;
+ left: 50%;
+ position: absolute;
+ transform: translate(-50%, -50%);
+ /* box-sizing: border-box;	 */
+ background-color: lightskyblue;
+ padding: 10PX;
+ border-radius: 1.2EM;
+}
