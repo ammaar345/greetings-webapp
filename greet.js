@@ -2,10 +2,10 @@ module.exports=function Greet(initialState) {
     var msg;
     var nameList=[]   
 
-    function countNamesStorage() {
-        var namesCount = Object.keys(namesGreeted)
-        return namesCount.length;
-    }
+    // function countNamesStorage() {
+    //     var namesCount = Object.keys(namesGreeted)
+    //     return namesCount.length;
+    // }
     function nameStorage() {
         return nameList;
 
@@ -47,7 +47,7 @@ return nameList;
         greetings,
         // checked,
        // validate,
-        countNamesStorage
+        // countNamesStorage
 // ,greeter
     }
 }

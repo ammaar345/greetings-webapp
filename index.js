@@ -29,9 +29,13 @@ app.use(bodyParser.json())
 
 
 app.post("/action",function(req,res){
+  //console.log(greet.greetings(greet.names()))
+ 
+   greet.greetings(req.body)
+   greet.names()
+   console.log(greet.names())
+ // console.log(req.body)
   res.redirect("/")
-  //greet.greetings(req.body.name,req.body.languageType )
-  console.log(req.body.languageType)
   
  })
  app.get("/action",function(req,res){
