@@ -16,7 +16,8 @@
         </div>
     </div> --}}
 
-<form action="/greetings" method="POST">
+<form action="/greeting" method="POST">
+   
      <div class="space topMessage ">
         <label for="nameOfUser">Name</label>
         <input type="text" name="name" class="nameOfUser" placeholder="Enter your name">
@@ -27,6 +28,12 @@
         <input type="radio" name="languageType" class=language value="Xhosa"> Xhosa
     </div>
     <div>
+
+        {{#if messages.info}}
+<div class="entry">
+    <h1> {{messages.info}}</h1>
+</div>
+{{/if}}
         {{{greeting}}}
     </div>
     <div>
@@ -37,6 +44,7 @@
     </div>
 
 </form>
+  <div><a  href="/greeted">Users Greeted </a></div>
     <div class="row col-auto space topMessage msg">
        
     </div>

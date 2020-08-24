@@ -46,10 +46,20 @@ function getNames(){
      return names
    
 }
+// function getCurrentName(){
+// return getNames()[i]
+
+
+// }
 function nameCounter(){
 
 return nameList.length;
 
+}
+function bread(input){
+    if (input===""){
+return "enter name"
+    }
 }
     return {
       //  languageChoice,
@@ -61,6 +71,8 @@ return nameList.length;
         nameStorage,
         greetings,
         getNames,
+        bread
+     //   getCurrentName
         // checked,
        // validate,
         // countNamesStorage
