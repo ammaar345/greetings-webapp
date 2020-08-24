@@ -41,10 +41,10 @@ return msg
 function getNames(){
     for(var i=0;i<nameList.length;i++){
         var names=nameList[i];
-       
+        return names
      }
-     return names
-   
+     
+  //return nameList; 
 }
 // function getCurrentName(){
 // return getNames()[i]
@@ -56,22 +56,18 @@ function nameCounter(){
 return nameList.length;
 
 }
-function bread(input){
+function flshMsg(input){
     if (input===""){
 return "enter name"
     }
 }
     return {
-      //  languageChoice,
-      //  greetCounter,]
-     
-
-     nameCounter ,
+      nameCounter ,
             names,
         nameStorage,
         greetings,
         getNames,
-        bread
+        flshMsg
      //   getCurrentName
         // checked,
        // validate,

@@ -40,7 +40,7 @@ app.post("/greeting", function (req, res) {
   greet.greetings(req.body.languageType, req.body.name)
   // greet.names()
   var name = req.body.name;
-  let flash=greet.bread(name)
+  let flash=greet.flshMsg(name)
   
   var greeting = greet.greetings(req.body.name, req.body.languageType)
   //console.log(req.body)
@@ -66,7 +66,7 @@ req.flash("info","enter name")
 
 })
 app.get("/greeted", function (req, res) {
-var names=greet.names()
+var names=greet.getNames()
   res.render("actions",{
   names:names
 })
