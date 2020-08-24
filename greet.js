@@ -1,4 +1,4 @@
-module.exports=function Greet(initialState) {
+module.exports=function Greet() {
     var msg;
     var nameList=[]   
 
@@ -8,11 +8,8 @@ module.exports=function Greet(initialState) {
     // }
     function nameStorage() {
         return nameList;
-
-
     }
-  
-    function greetings(nameInput,lang){
+    function greetings(name,lang){
         if (lang === "English") {
             msg = "Hello, " + name;
 
@@ -23,28 +20,47 @@ module.exports=function Greet(initialState) {
         }
 
         else if (lang === "Xhosa") {
-            msg = "Molo ," + name;
+            msg = "Molo," + name;
 
         }
     //}
+
+return msg
+ }    
+ 
+ function names(name){
     
-if (!nameList.includes(nameInput)&&nameInput!==""){
-    nameList.push({
-        namesGreeted :nameInput
-    });
+    if (/*!nameList.includes(name)&&*/name!==""){
+        nameList.push(
+            name
+          );
+        
+    }
     
 }
-return msg
-  }  
-    function names(){
-return nameList;
-    }
+function getNames(){
+    for(var i=0;i<nameList.length;i++){
+        var names=nameList[i];
+       
+     }
+     return names
+   
+}
+function nameCounter(){
+
+return nameList.length;
+
+}
     return {
       //  languageChoice,
       //  greetCounter,]
-      names,
+     
+
+     nameCounter ,
+            names,
         nameStorage,
         greetings,
+        getNames,
         // checked,
        // validate,
         // countNamesStorage

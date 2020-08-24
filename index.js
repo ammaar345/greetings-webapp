@@ -18,31 +18,40 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
  
 //console.log(greet.greeter())
-
-
-
-
  app.get('/', function (req, res) {
-  res.render("index")
+   var count=greet.nameCounter;
+  res.render("index",{
+counter:count
+
+  })
 })
 
 
-
-app.post("/action",function(req,res){
-  //console.log(greet.greetings(greet.names()))
- 
-   greet.greetings(req.body)
-   greet.names()
-   console.log(greet.names())
+app.post("/greetings",function(req,res){
+  
+   greet.greetings(req.body.languageType,req.body.name)
+  // greet.names()
+  var greeting=greet.greetings(req.body.name,req.body.languageType)
+ //console.log(req.body)
+ greet.names(req.body.name)
+//console.log(greet.getNames())
+     console.log(greet.getNames())
  // console.log(req.body)
-  res.redirect("/")
+ var count=greet.nameCounter;
+ res.render("index",{greeting:greeting,
+counter:count})
+
+//console.log(greet.nameCounter())
+  // res.redirect("/")
   
  })
- app.get("/action",function(req,res){
-   res.render("index",{greeting:greet.greetings()})
- })
-// console.log(greet.names())
 
+ app.post("/"),function(req,res){
+
+ }
+//  
+ //)(req.body.name,req.body.languageType)
+ 
 
 
 
