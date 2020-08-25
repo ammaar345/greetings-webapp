@@ -39,12 +39,12 @@ return msg
     
 }
 function getNames(){
-    for(var i=0;i<nameList.length;i++){
-        var names=nameList[i];
-        return names
-     }
+    // for(var i=0;i<nameList.length;i++){
+    //     var names=nameList[i];
+    //     return names
+    //  }
      
-  //return nameList; 
+  return nameList; 
 }
 // function getCurrentName(){
 // return getNames()[i]
