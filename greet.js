@@ -22,7 +22,7 @@ module.exports = function Greet() {
     }
 
     function names(name) {
-        
+
         if (!nameList.includes(name) && name !== "") {
             nameList.push(
                 name
@@ -33,10 +33,16 @@ module.exports = function Greet() {
     }
     function singleNameCount(name) {
         var icount = 0;
-        if (nameList.includes(name)) {
-            icount ++;
+        //   for(var i=0;i<nameList.length;i++){
+        if (nameList[i].includes(name)) {
+            icount++;
 
-
+            //try and use filter function from registration,
+             //for counting how many times a single name has been counted. 
+            //-or try and make an if statement in an if statement
+            // to count how many times one name has been counted , 
+            //or make two separate if statements to check how many times one name has been counted
+            //  }
         }
         return icount;
     }
