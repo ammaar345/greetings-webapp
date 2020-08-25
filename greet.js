@@ -1,15 +1,8 @@
-module.exports=function Greet() {
+module.exports = function Greet() {
     var msg;
-    var nameList=[]   
+    var nameList = []
 
-    // function countNamesStorage() {
-    //     var namesCount = Object.keys(namesGreeted)
-    //     return namesCount.length;
-    // }
-    function nameStorage() {
-        return nameList;
-    }
-    function greetings(name,lang){
+    function greetings(name, lang) {
         if (lang === "English") {
             msg = "Hello, " + name;
 
@@ -23,56 +16,65 @@ module.exports=function Greet() {
             msg = "Molo," + name;
 
         }
-    //}
+        //}
 
-return msg
- }    
- 
- function names(name){
-    
-    if (/*!nameList.includes(name)&&*/name!==""){
-        nameList.push(
-            name
-          );
+        return msg
+    }
+
+    function names(name) {
         
+        if (!nameList.includes(name) && name !== "") {
+            nameList.push(
+                name
+            );
+
+        }
+
     }
-    
-}
-function getNames(){
-    // for(var i=0;i<nameList.length;i++){
-    //     var names=nameList[i];
-    //     return names
-    //  }
-     
-  return nameList; 
-}
-// function getCurrentName(){
-// return getNames()[i]
+    function singleNameCount(name) {
+        var icount = 0;
+        if (nameList.includes(name)) {
+            icount ++;
 
 
-// }
-function nameCounter(){
-
-return nameList.length;
-
-}
-function flshMsg(input){
-    if (input===""){
-return "enter name"
+        }
+        return icount;
     }
-}
+    function getNames() {
+        // for(var i=0;i<nameList.length;i++){
+        //     var names=nameList[i];
+        //     return names
+        //  }
+
+        return nameList;
+    }
+    // function getCurrentName(){
+    // return getNames()[i]
+
+
+    // }
+    function nameCounter() {
+
+        return nameList.length;
+
+    }
+    function flshMsg(input) {
+        if (input === "") {
+            return "enter name"
+        }
+    }
     return {
-      nameCounter ,
-            names,
-        nameStorage,
+        nameCounter,
+        names,
+        singleNameCount,
         greetings,
         getNames,
         flshMsg
-     //   getCurrentName
+        //   getCurrentName
         // checked,
-       // validate,
+        // validate,
         // countNamesStorage
-// ,greeter
+        // ,greeter
     }
 }
 //  function greetCounter(userName) {

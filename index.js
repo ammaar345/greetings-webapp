@@ -24,8 +24,6 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-
-//console.log(greet.greeter())
 app.get('/', function (req, res) {
   var count = greet.nameCounter;
   res.render("index", {
@@ -33,7 +31,20 @@ app.get('/', function (req, res) {
 
   })
 })
+app.get("/greeting",function(req,res){
 
+
+})
+app.get("/counter",function(req,res){
+  greet.names()
+var name =req.body.name;
+  var nameStore = greet.singleNameCount(name);
+  res.render("greet",{
+nameCount :nameStore
+
+})
+
+})
 
 app.post("/greeting", function (req, res) {
 
@@ -43,12 +54,7 @@ app.post("/greeting", function (req, res) {
   let flash=greet.flshMsg(name)
   
   var greeting = greet.greetings(req.body.name, req.body.languageType)
-  //console.log(req.body)
-  greet.names(req.body.name)
-  //console.log(greet.getNames())
-  //console.log(greet.getNames())
-  // console.log(greet.getCurrentName())
-  // console.log(req.body)
+  greet.names(name);
   var count = greet.nameCounter;
   if (flash){
 req.flash("info","enter name")
@@ -67,16 +73,12 @@ req.flash("info","enter name")
 })
 app.get("/greeted", function (req, res) {
 var names=greet.getNames()
+greet.names()
+//greet.greetings(req.body.name, req.body.languageType)
   res.render("actions",{
   names:names
 })
-
-
-}
-  //  
-  //)(req.body.name,req.body.languageType)
-
-)
+})
 
 
 const PORT = process.env.PORT || 3000;
