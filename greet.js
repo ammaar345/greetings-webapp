@@ -1,8 +1,11 @@
 module.exports = function Greet() {
     var msg;
     var nameList = []
-
-    function greetings(name, lang) {
+    //var icount = 0
+    
+   
+    function greetUser(name, lang) {
+      // name=name.toLowerCase()
         if (lang === "English") {
             msg = "Hello, " + name;
 
@@ -24,6 +27,7 @@ module.exports = function Greet() {
     function names(name) {
 
         if (!nameList.includes(name) && name !== "") {
+           
             nameList.push(
                 name
             );
@@ -32,11 +36,11 @@ module.exports = function Greet() {
 
     }
     function singleNameCount(name) {
-        var icount = 0;
+        var filteredName=[]
         //   for(var i=0;i<nameList.length;i++){
-        if (nameList[i].includes(name)) {
-            icount++;
-
+        if (nameList.includes(name)) {
+            filteredName.push(name);
+//icount+=1
             //try and use filter function from registration,
              //for counting how many times a single name has been counted. 
             //-or try and make an if statement in an if statement
@@ -44,8 +48,9 @@ module.exports = function Greet() {
             //or make two separate if statements to check how many times one name has been counted
             //  }
         }
-        return icount;
-    }
+        return filteredName.length;
+        //icount//   
+     }
     function getNames() {
         // for(var i=0;i<nameList.length;i++){
         //     var names=nameList[i];
@@ -73,7 +78,7 @@ module.exports = function Greet() {
         nameCounter,
         names,
         singleNameCount,
-        greetings,
+        greetUser,
         getNames,
         flshMsg
         //   getCurrentName

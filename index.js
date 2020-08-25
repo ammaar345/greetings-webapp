@@ -36,26 +36,27 @@ app.get("/greeting",function(req,res){
 
 })
 app.get("/counter",function(req,res){
-  greet.names()
+  //greet.names()
 var name =req.body.name;
+greet.singleNameCount(name)
   var nameStore = greet.singleNameCount(name);
   res.render("greet",{
 nameCount :nameStore
 
 })
-
+//console.log(req.params)
 })
 
 app.post("/greeting", function (req, res) {
 
-  greet.greetings(req.body.languageType, req.body.name)
+  greet.greetUser(req.body.languageType, req.body.name)
   // greet.names()
   var name = req.body.name;
   let flash=greet.flshMsg(name)
   
-  var greeting = greet.greetings(req.body.name, req.body.languageType)
+  var greeting = greet.greetUser(req.body.name, req.body.languageType)
   greet.names(name);
-  var count = greet.nameCounter;
+  var count = greet.nameCounter();
   if (flash){
 req.flash("info","enter name")
 
