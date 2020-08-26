@@ -41,7 +41,7 @@ app.post("/greeting", function (req, res) {
 
   var name = req.body.name;
   var language = req.body.languageType;
-  // greet.names()
+
 
   let flash = greet.flshMsg(name);
   var greeting = greet.greetUser(name, language);
@@ -58,19 +58,14 @@ app.post("/greeting", function (req, res) {
   res.render("index", {
     greeting: greeting,
     counter: count
-    // name: name
-
+    
   })
   console.log(name)
-  //console.log(greet.nameCounter())
-  // res.redirect("/")
-
+  
 })
 
 app.get("/greeted", function (req, res) {
   var names = greet.getNames()
-  // greet.names()
-  //greet.greetings(req.body.name, req.body.languageType)
   res.render("actions", {
     names: names
   })
@@ -78,10 +73,8 @@ app.get("/greeted", function (req, res) {
 
 
 app.get("/counter/:name", function (req, res) {
-  //greet.names()
+
   var name = req.params.name;
-  //greet.singleNameCount(name)
-  // var userName = req.body.name
   var nameCount = greet.singleNameCount(name);
 
   res.render("greet", {
@@ -89,7 +82,6 @@ app.get("/counter/:name", function (req, res) {
     nameCount
   }
   )
-  //console.log(req.params)
 })
 
 const PORT = process.env.PORT || 3000;

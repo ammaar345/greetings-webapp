@@ -5,15 +5,16 @@ module.exports = function Greet() {
 
     function names(name) {
         //if (name !=="") {
-        if (nameMap[name] === undefined) {
-            nameMap[name] = 0
+            var userName=name.charAt(0).toUpperCase()+name.toLowerCase().slice(1)
+        if (nameMap[userName] === undefined) {
+            nameMap[userName] = 0
         }
         //      }
-        nameMap[name]++
+        nameMap[userName]++
     }
-    function singleNameCount(name) {
+    function singleNameCount(nameParam) {
 
-        return nameMap[name]
+        return nameMap[nameParam.charAt(0).toUpperCase()+nameParam.toLowerCase().slice(1)]
 
 
     }
@@ -24,6 +25,7 @@ module.exports = function Greet() {
     function greetUser(name, lang) {
         //  name = name.toLowerCase()
         var msg = "";
+        name=name.charAt(0).toUpperCase()+name.toLowerCase().slice(1);
         if (!name == "") {
             names(name);
             if (lang === "English") {
