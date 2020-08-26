@@ -1,11 +1,20 @@
 module.exports = function Greet() {
     var msg;
-    var nameList = []
-    //var icount = 0
-    
-   
+    var nameMap = {};
+    var personCount = 0
+    function names(name) {
+        if (nameMap[name] === undefined) {
+            nameMap[name] = 0
+        }
+        nameMap[name]++
+                 
+
+    }
+    function map(){
+        return nameMap;
+    }
     function greetUser(name, lang) {
-      // name=name.toLowerCase()
+        // name=name.toLowerCase()
         if (lang === "English") {
             msg = "Hello, " + name;
 
@@ -23,50 +32,18 @@ module.exports = function Greet() {
 
         return msg
     }
-
-    function names(name) {
-
-        if (!nameList.includes(name) && name !== "") {
-           
-            nameList.push(
-                name
-            );
-
-        }
-
-    }
-    function singleNameCount(name) {
-        var filteredName=[]
-        //   for(var i=0;i<nameList.length;i++){
-        if (nameList.includes(name)) {
-            filteredName.push(name);
-//icount+=1
-            //try and use filter function from registration,
-             //for counting how many times a single name has been counted. 
-            //-or try and make an if statement in an if statement
-            // to count how many times one name has been counted , 
-            //or make two separate if statements to check how many times one name has been counted
-            //  }
-        }
-        return filteredName.length;
-        //icount//   
-     }
     function getNames() {
         // for(var i=0;i<nameList.length;i++){
         //     var names=nameList[i];
         //     return names
         //  }
 
-        return nameList;
+        return Object.keys(nameMap);
     }
-    // function getCurrentName(){
-    // return getNames()[i]
-
-
-    // }
     function nameCounter() {
+        var count = Object.keys(nameMap)
 
-        return nameList.length;
+        return count.length
 
     }
     function flshMsg(input) {
@@ -77,10 +54,11 @@ module.exports = function Greet() {
     return {
         nameCounter,
         names,
-        singleNameCount,
+        //    singleNameCount,
         greetUser,
         getNames,
-        flshMsg
+        flshMsg,
+        map
         //   getCurrentName
         // checked,
         // validate,
