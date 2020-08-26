@@ -28,18 +28,18 @@ app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
   var name = req.body.name;
-   var language=req.body.languageType;
-    greet.names(name)
+  var language = req.body.languageType;
+  // greet.names(name)
 
-   var counter=greet.nameCounter()
-   var greeted=greet.greetUser(name,language)
-   //var count = greet.nameCounter();
-//   console.log(greet.names(name))
- //  console.log(greet.map())
-  
-  res.render("index",{
- greeting:greeted,
-count :counter
+  var counter = greet.nameCounter()
+  var greeted = greet.greetUser(name, language)
+  //var count = greet.nameCounter();
+  //   console.log(greet.names(name))
+  //  console.log(greet.map())
+
+  res.render("index", {
+    greeting: greeted,
+    counter: counter
   })
 })
 
@@ -49,17 +49,18 @@ app.post("/greeting", function (req, res) {
   // greet.names()
   var name = req.body.name;
   var greeting = greet.greetUser(req.body.name, req.body.languageType)
-  var count = greet.nameCounter();
+  
   let flash = greet.flshMsg(name);
   greet.names(name);
-  if (flash) {
-    req.flash("info", "enter name")
+  var count = greet.nameCounter();
+  // if (flash) {
+  //   req.flash("info", "enter name")
 
-  }
+  // }
   res.render("index", {
     greeting: greeting,
-     counter: count,
-   // name: name
+    counter: count
+    // name: name
 
   })
   console.log(name)
@@ -67,28 +68,31 @@ app.post("/greeting", function (req, res) {
   // res.redirect("/")
 
 })
-// app.get("/greeted", function (req, res) {
-//   var names = greet.getNames()
-//   // greet.names()
-//   //greet.greetings(req.body.name, req.body.languageType)
-//   res.render("actions", {
-//     names: names
-//   })
-// })
+
+app.get("/greeted", function (req, res) {
+  var names = greet.getNames()
+  // greet.names()
+  //greet.greetings(req.body.name, req.body.languageType)
+  res.render("actions", {
+    names: names
+  })
+})
 
 
-// app.get("/counter:name", function (req, res) {
-//   //greet.names()
-//   var name = req.body.name;
-//   //greet.singleNameCount(name)
-//   //var nameStore = greet.singleNameCount(name);
-//   res.render("greet"//,{
-//     //nameCount :nameStore
+app.get("/counter/:name", function (req, res) {
+  //greet.names()
+  var name = req.params.name;
+  //greet.singleNameCount(name)
+ // var userName = req.body.name
+  var nameCount = greet.singleNameCount(name);
 
-//     //}
-//   )
-//   //console.log(req.params)
-// })
+  res.render("greet", {
+    name,
+    nameCount
+  }
+  )
+  //console.log(req.params)
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {

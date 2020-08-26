@@ -1,18 +1,24 @@
 module.exports = function Greet() {
     var msg;
     var nameMap = {};
-    var personCount = 0
+    //  var personCount = 0;
+
     function names(name) {
         if (nameMap[name] === undefined) {
             nameMap[name] = 0
         }
         nameMap[name]++
-                 
+    }
+    function singleNameCount(name) {
+
+        return nameMap[name]
+
 
     }
-    function map(){
+    function map() {
         return nameMap;
     }
+
     function greetUser(name, lang) {
         // name=name.toLowerCase()
         if (lang === "English") {
@@ -58,7 +64,8 @@ module.exports = function Greet() {
         greetUser,
         getNames,
         flshMsg,
-        map
+        map,
+        singleNameCount
         //   getCurrentName
         // checked,
         // validate,
