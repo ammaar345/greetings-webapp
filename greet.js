@@ -1,12 +1,14 @@
 module.exports = function Greet() {
-    var msg;
+
     var nameMap = {};
     //  var personCount = 0;
 
     function names(name) {
+        //if (name !=="") {
         if (nameMap[name] === undefined) {
             nameMap[name] = 0
         }
+        //      }
         nameMap[name]++
     }
     function singleNameCount(name) {
@@ -20,22 +22,24 @@ module.exports = function Greet() {
     }
 
     function greetUser(name, lang) {
-        // name=name.toLowerCase()
-        if (lang === "English") {
-            msg = "Hello, " + name;
+        //  name = name.toLowerCase()
+        var msg = "";
+        if (!name == "") {
+            names(name);
+            if (lang === "English") {
+                msg = "Hello, " + name;
 
+            }
+            else if (lang === "Afrikaans") {
+                msg = "Halo, " + name;
+
+            }
+
+            else if (lang === "Xhosa") {
+                msg = "Molo," + name;
+
+            }
         }
-        else if (lang === "Afrikaans") {
-            msg = "Halo, " + name;
-
-        }
-
-        else if (lang === "Xhosa") {
-            msg = "Molo," + name;
-
-        }
-        //}
-
         return msg
     }
     function getNames() {
@@ -54,7 +58,7 @@ module.exports = function Greet() {
     }
     function flshMsg(input) {
         if (input === "") {
-            return "enter name"
+            return "Enter a name"
         }
     }
     return {

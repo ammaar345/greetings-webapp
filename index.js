@@ -27,36 +27,34 @@ app.use(bodyParser.json())
 
 
 app.get('/', function (req, res) {
-  var name = req.body.name;
-  var language = req.body.languageType;
-  // greet.names(name)
-
   var counter = greet.nameCounter()
-  var greeted = greet.greetUser(name, language)
   //var count = greet.nameCounter();
   //   console.log(greet.names(name))
-  //  console.log(greet.map())
+  console.log(greet.map())
 
   res.render("index", {
-    greeting: greeted,
     counter: counter
   })
 })
 
 app.post("/greeting", function (req, res) {
 
-  greet.greetUser(req.body.languageType, req.body.name)
-  // greet.names()
   var name = req.body.name;
-  var greeting = greet.greetUser(req.body.name, req.body.languageType)
-  
-  let flash = greet.flshMsg(name);
-  greet.names(name);
-  var count = greet.nameCounter();
-  // if (flash) {
-  //   req.flash("info", "enter name")
+  var language = req.body.languageType;
+  // greet.names()
 
-  // }
+  let flash = greet.flshMsg(name);
+  var greeting = greet.greetUser(name, language);
+
+  var count = greet.nameCounter();
+
+
+  if (flash) {
+    req.flash("info", "Enter a name")
+
+  }
+
+
   res.render("index", {
     greeting: greeting,
     counter: count
@@ -83,7 +81,7 @@ app.get("/counter/:name", function (req, res) {
   //greet.names()
   var name = req.params.name;
   //greet.singleNameCount(name)
- // var userName = req.body.name
+  // var userName = req.body.name
   var nameCount = greet.singleNameCount(name);
 
   res.render("greet", {
