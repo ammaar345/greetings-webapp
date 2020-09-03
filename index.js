@@ -27,8 +27,8 @@ app.use(bodyParser.json())
 app.get('/',async function (req, res) {
   //var counter = greet.nameCounter()
   
-  var counter=await greet.nameCounter()//pool.query('select times_greeted as counter from names')//('select id ,name ,times_greeted as counter from names')
-  res.render("index", {
+  var counter=await greet.nameCounter()
+   res.render("index", {
     counter
   })
   
@@ -42,7 +42,7 @@ app.post("/greeting", async function (req, res) {
   let flash = await greet.flshMsg(name);
   var greeting = await greet.greetUser(name, language);
 
-  var count = await greet.nameCounter();
+  var counter = await greet.nameCounter();
   if (flash) {
     req.flash("info", "Enter a name")
 
@@ -52,7 +52,7 @@ app.post("/greeting", async function (req, res) {
   res.render("index", {
     greeting: greeting
     ,
-    counter: count
+    counter
 
   })
 })
@@ -60,7 +60,7 @@ app.post("/greeting", async function (req, res) {
 app.get("/greeted",async function (req, res) {
   var names = await greet.getNames()
   res.render("actions", {
-    names: names
+   names
   })
 })
 
