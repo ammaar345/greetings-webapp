@@ -27,6 +27,7 @@
     "express-session": "^1.17.1",
     "heroku": "^7.42.12",
     "mocha": "^8.1.2",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.3"
   }
 }

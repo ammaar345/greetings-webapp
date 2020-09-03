@@ -6,6 +6,7 @@ const Greet = require("./greet");
 const flash = require('express-flash');
 const session = require('express-session');
 const greet = Greet();
+
 app.use(session({
   secret: "<add a secret string here>",
   resave: false,
@@ -23,23 +24,25 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-app.get('/', function (req, res) {
-  var counter = greet.nameCounter()
+app.get('/',async function (req, res) {
+  //var counter = greet.nameCounter()
+  
+  var counter=await greet.nameCounter()//pool.query('select times_greeted as counter from names')//('select id ,name ,times_greeted as counter from names')
   res.render("index", {
-    counter: counter
+    counter
   })
+  
 })
 
-app.post("/greeting", function (req, res) {
+app.post("/greeting", async function (req, res) {
 
   var name = req.body.name;
   var language = req.body.languageType;
 
-  let flash = greet.flshMsg(name);
-  var greeting = greet.greetUser(name, language);
+  let flash = await greet.flshMsg(name);
+  var greeting = await greet.greetUser(name, language);
 
-  var count = greet.nameCounter();
-
+  var count = await greet.nameCounter();
   if (flash) {
     req.flash("info", "Enter a name")
 
@@ -47,24 +50,25 @@ app.post("/greeting", function (req, res) {
 
 
   res.render("index", {
-    greeting: greeting,
+    greeting: greeting
+    ,
     counter: count
 
   })
 })
 
-app.get("/greeted", function (req, res) {
-  var names = greet.getNames()
+app.get("/greeted",async function (req, res) {
+  var names = await greet.getNames()
   res.render("actions", {
     names: names
   })
 })
 
 
-app.get("/counter/:name", function (req, res) {
+app.get("/counter/:name",async function (req, res) {
 
   var name = req.params.name;
-  var nameCount = greet.singleNameCount(name);
+  var nameCount =await greet.singleNameCount(name);
 
   res.render("greet", {
     name,

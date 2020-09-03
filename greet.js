@@ -1,25 +1,42 @@
 module.exports = function Greet() {
-
+    const pg = require("pg");
+    const Pool = pg.Pool;
+    const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings-webapp';
+    
+    const pool = new Pool({
+        connectionString
+    });
+    
     var nameMap = {};
-
-    function names(name) {
-        var userName = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1)
+    async function addEntry(param){
+        const INSERT_QUERY = "insert into tblNames (name,greeted_count) values ($1, $2)";
+        await pool.query(INSERT_QUERY, [param.name, param.counter]);
+    
+          
+    }
+   async function names(userN) {
+        var userName =await userN.charAt(0).toUpperCase() + userN.toLowerCase().slice(1)
+    
         if (nameMap[userName] === undefined) {
             nameMap[userName] = 0
+           
+            //addEntry()
         }
         nameMap[userName]++
     }
-    function singleNameCount(nameParam) {
+    async   function singleNameCount(nameParam) {
 
-        return nameMap[nameParam.charAt(0).toUpperCase() + nameParam.toLowerCase().slice(1)]
+        return  await nameMap[nameParam.charAt(0).toUpperCase() + nameParam.toLowerCase().slice(1)]
 
 
     }
-    function greetUser(name, lang) {
+    async function greetUser(name, lang) {
         var msg = "";
         name = name.charAt(0).toUpperCase() + name.toLowerCase().slice(1);
+        
         if (!name == "") {
             names(name);
+            addEntry(name)
             if (lang === "English") {
                 msg = "Hello, " + name;
 
@@ -34,18 +51,22 @@ module.exports = function Greet() {
 
             }
         }
+  
         return msg
     }
 
-    function getNames() {
+    async     function getNames() {
 
         return Object.keys(nameMap);
     }
-    function nameCounter() {
-        var count = Object.keys(nameMap)
-
-        return count.length
-
+   async function nameCounter() {
+        // var count = Object.keys(nameMap)
+        const SELECT_QUERY = 'SELECT count (*) as counter from tblNames';
+       
+        var count=await pool.query(SELECT_QUERY);
+        // return count.length
+      console.log(count.rows)
+return count.rows
     }
     function flshMsg(input) {
         if (input === "") {
@@ -58,6 +79,7 @@ module.exports = function Greet() {
         greetUser,
         getNames,
         flshMsg,
-        singleNameCount
+        singleNameCount,
+        addEntry
     }
 }
