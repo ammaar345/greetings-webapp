@@ -9,17 +9,20 @@ module.exports = function Greet() {
     
     var nameMap = {};
     async function addEntry(param){
-        const INSERT_QUERY = 'insert into tblNames (name,greeted_count) values ($1, $2)';
-        await pool.query(INSERT_QUERY, [param.name, param.counter]);
+        const INSERT_QUERY = ' insert into tblNames (name,greeted_count) values ($1,1)';
+        await pool.query(INSERT_QUERY, [param.name]);
     
           
+    }
+    function map (){
+return nameMap;
     }
    async function names(userN) {
         const userName =await userN.charAt(0).toUpperCase() +await userN.toLowerCase().slice(1)
     
         if (nameMap[userName] === undefined) {
-            nameMap[userName] = 0
-           
+            nameMap[userName] = userName;
+           nameMap[userName]=0;
             //addEntry()
         }
         nameMap[userName]++
@@ -36,7 +39,7 @@ module.exports = function Greet() {
         
         if (!name == "") {
             names(name);
-            addEntry(name)
+           // addEntry(name)
             if (lang === "English") {
                 msg = "Hello, " + name;
 
@@ -57,17 +60,17 @@ module.exports = function Greet() {
 
     async function getNames() {
 // const SELECT_QUERY=
-const users=await pool.query('SELECT id,name , greeted_count as nameCount FROM tblNames')      
+const users=await pool.query('SELECT name FROM tblNames')      
 return users.rows
 
     }
    async function nameCounter() {
         // var count = Object.keys(nameMap)
-        const SELECT_QUERY = 'SELECT count (*) as counter from tblNames';
+        const SELECT_QUERY = 'SELECT count (*) from tblNames';
        
         const count=await pool.query(SELECT_QUERY);
         // return count.length
-      console.log(count.rows)
+    //  console.log(count.rows)
 return count.rows
     }
     function flshMsg(input) {
@@ -82,6 +85,7 @@ return count.rows
         getNames,
         flshMsg,
         singleNameCount,
-        addEntry
+        addEntry,
+        map
     }
 }

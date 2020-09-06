@@ -47,11 +47,13 @@ app.post("/greeting", async function (req, res) {
     req.flash("info", "Enter a name")
 
   }
-
-
+await greet.addEntry({
+  name,
+  counter
+})
+console.log(greet.map())
   res.render("index", {
-    greeting: greeting
-    ,
+    greeting: greeting,
     counter
 
   })
