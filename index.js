@@ -6,7 +6,6 @@ const Greet = require("./greet");
 const flash = require('express-flash');
 const session = require('express-session');
 const greet = Greet();
-
 app.use(session({
   secret: "<add a secret string here>",
   resave: false,
