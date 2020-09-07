@@ -3,9 +3,9 @@
     <a href="/">back</a>
 </div>
 
-<ul>{{#each names}}
+<ul>{{#each keyName}}
     <li>
-        <a href="/counter/{{this}}">{{this}}</a>
+        <a href="/counter/{{this.name}}">{{this.name}}</a>
     </li>
     {{/each}}
 </ul

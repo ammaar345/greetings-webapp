@@ -51,7 +51,7 @@ await greet.addEntry({
   name,
   counter
 })
-console.log(greet.map())
+//console.log(greet.map())
   res.render("index", {
     greeting: greeting,
     counter
@@ -62,8 +62,9 @@ console.log(greet.map())
 app.get("/greeted",async function (req, res) {
   var names = await greet.getNames()
   res.render("actions", {
-   names
-  })
+    keyName:names
+    
+   })
 })
 
 

@@ -1,7 +1,7 @@
 module.exports = function Greet() {
     const pg = require("pg");
     const Pool = pg.Pool;
-    const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings-webapp';
+    const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greetings-webapp';
     
     const pool = new Pool({
         connectionString
@@ -9,14 +9,12 @@ module.exports = function Greet() {
     
     var nameMap = {};
     async function addEntry(param){
-        const INSERT_QUERY = ' insert into tblNames (name,greeted_count) values ($1,1)';
+        const INSERT_QUERY = ' insert into users (name,greeted_count) values ($1,1)';
         await pool.query(INSERT_QUERY, [param.name]);
     
           
     }
-    function map (){
-return nameMap;
-    }
+   
    async function names(userN) {
         const userName =await userN.charAt(0).toUpperCase() +await userN.toLowerCase().slice(1)
     
@@ -60,18 +58,19 @@ return nameMap;
 
     async function getNames() {
 // const SELECT_QUERY=
-const users=await pool.query('SELECT name FROM tblNames')      
-return users.rows
+const users=await pool.query('SELECT name FROM users')      
+// var userNames=Object.keys(users.rows);
+    return users.rows;
+}
 
-    }
+    
    async function nameCounter() {
         // var count = Object.keys(nameMap)
-        const SELECT_QUERY = 'SELECT count (*) from tblNames';
-       
+        const SELECT_QUERY = 'SELECT id from users';
         const count=await pool.query(SELECT_QUERY);
         // return count.length
     //  console.log(count.rows)
-return count.rows
+return count.rowCount
     }
     function flshMsg(input) {
         if (input === "") {
@@ -86,6 +85,6 @@ return count.rows
         flshMsg,
         singleNameCount,
         addEntry,
-        map
+      
     }
 }
