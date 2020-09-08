@@ -24,8 +24,6 @@ app.use(bodyParser.json())
 
 
 app.get('/',async function (req, res) {
-  //var counter = greet.nameCounter()
-  
   var counter=await greet.nameCounter()
    res.render("index", {
     counter
@@ -40,21 +38,18 @@ app.post("/greeting", async function (req, res) {
 
   let flash = await greet.flshMsg(name);
   var greeting = await greet.greetUser(name, language);
-
+  await greet.addEntry({
+    name
+  })
   var counter = await greet.nameCounter();
   if (flash) {
     req.flash("info", "Enter a name")
 
   }
-await greet.addEntry({
-  name,
-  counter
-})
-//console.log(greet.map())
-  res.render("index", {
-    greeting: greeting,
-    counter
 
+res.render("index", {
+    greeting: greeting,
+     counter
   })
 })
 

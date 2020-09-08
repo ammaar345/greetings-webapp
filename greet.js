@@ -1,7 +1,7 @@
 module.exports = function Greet() {
     const pg = require("pg");
     const Pool = pg.Pool;
-    const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greetings-webapp';
+    const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings-webapp';
     
     const pool = new Pool({
         connectionString
@@ -9,7 +9,7 @@ module.exports = function Greet() {
     
     var nameMap = {};
     async function addEntry(param){
-        const INSERT_QUERY = ' insert into users (name,greeted_count) values ($1,1)';
+        const INSERT_QUERY = ' insert into users (name,count) values ($1,1)';
         await pool.query(INSERT_QUERY, [param.name]);
     
           
@@ -33,22 +33,19 @@ module.exports = function Greet() {
     }
     async function greetUser(name, lang) {
         var msg = "";
-        name = await name.charAt(0).toUpperCase() +await name.toLowerCase().slice(1);
-        
-        if (!name == "") {
-            names(name);
-           // addEntry(name)
-            if (lang === "English") {
-                msg = "Hello, " + name;
+        user = await (name.charAt(0).toUpperCase() +name.toLowerCase().slice(1));
+        if (!user == "") {
+                if (lang === "English") {
+                msg = "Hello, " + user;
 
             }
             else if (lang === "Afrikaans") {
-                msg = "Halo, " + name;
+                msg = "Halo, " + user;
 
             }
 
             else if (lang === "Xhosa") {
-                msg = "Molo, " + name;
+                msg = "Molo, " + user;
 
             }
         }
