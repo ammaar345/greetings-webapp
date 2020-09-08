@@ -23,12 +23,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-app.get('/',async function (req, res) {
-  var counter=await greet.nameCounter()
-   res.render("index", {
+app.get('/', async function (req, res) {
+  var counter = await greet.nameCounter()
+  res.render("index", {
     counter
   })
-  
+
 })
 
 app.post("/greeting", async function (req, res) {
@@ -47,25 +47,24 @@ app.post("/greeting", async function (req, res) {
 
   }
 
-res.render("index", {
+  res.render("index", {
     greeting: greeting,
-     counter
+    counter
   })
 })
 
-app.get("/greeted",async function (req, res) {
+app.get("/greeted", async function (req, res) {
   var names = await greet.getNames()
   res.render("actions", {
-    keyName:names
-    
-   })
+    keyName: names
+  })
 })
 
 
-app.get("/counter/:name",async function (req, res) {
+app.get("/counter/:name", async function (req, res) {
 
   var name = req.params.name;
-  var nameCount =await greet.singleNameCount(name);
+  var nameCount = await greet.singleNameCount(name);
 
   res.render("greet", {
     name,
