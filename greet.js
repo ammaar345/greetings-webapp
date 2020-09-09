@@ -7,9 +7,10 @@ module.exports = function Greet() {
     });
     var nameMap = {};
     async function addEntry(param) {
-       if(param.name!==''){
-        const INSERT_QUERY = ' insert into users (name,greeted_count) values ($1,1)';
-        await pool.query(INSERT_QUERY, [param.name]);}
+        if (param.name !== '') {
+            const INSERT_QUERY = ' insert into users (name,greeted_count) values ($1,1)';
+            await pool.query(INSERT_QUERY, [param]);
+        }
     }
 
     //    async function names(userN) {
@@ -22,26 +23,31 @@ module.exports = function Greet() {
     //         }
     //         nameMap[userName]++
     //     }
-//async function greetings (name, language) {
-    
-  
+    //async function greetings (name, language) {
 
-    async  function  countGreeted (parameter){
-        const SELECT_QUERY='Select name from users where name=$1'
-const UPDATE_QUERY='UPDATE users set greeted_count=greeted_count+1  where name=$1 ';
 
-if (SELECT_QUERY){
-    await pool.query(UPDATE_QUERY)
-}
-else {
-    addEntry(parameter)
-}
+
+    async function countGreeted(parameter) {
+        const SELECT_QUERY = 'Select name from users where name=$1'
+        const UPDATE_QUERY = 'UPDATE users set greeted_count=greeted_count+1  where name=$1 ';
+        const user = await pool.query(SELECT_QUERY, [parameter])
+        if (user.rows.length > 0) {
+            await pool.query(UPDATE_QUERY, [parameter])
+        }
+        else {
+            await addEntry(parameter)
+        }
 
     }
 
     async function singleNameCount(nameParam) {
-
-        return await nameMap[nameParam.charAt(0).toUpperCase() + await nameParam.toLowerCase().slice(1)]
+        const SELECT_QUERY = 'Select greeted_count from users where name=$1'
+        const user = await pool.query(SELECT_QUERY, [nameParam])
+        if (user.rows.length > 0) {
+            return user.rows[0].greeted_count;
+        }
+        return 0;
+        // return await nameMap[nameParam.charAt(0).toUpperCase() + await nameParam.toLowerCase().slice(1)]
 
 
     }

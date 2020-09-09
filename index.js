@@ -37,16 +37,15 @@ app.post("/greeting", async function (req, res) {
   var language = req.body.languageType;
 
   let flash = await greet.flshMsg(name);
-  var greeting = await greet.greetUser(name, language);
-  await greet.addEntry({
-    name
-  })
-  var counter = await greet.nameCounter();
   if (flash) {
     req.flash("info", "Enter a name")
 
   }
-
+  var greeting = await greet.greetUser(name, language);
+  await greet.countGreeted(name);
+  
+  var counter = await greet.nameCounter();
+ 
   res.render("index", {
     greeting: greeting,
     counter
