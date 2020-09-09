@@ -4,27 +4,6 @@ const greet = require("../greet");
 describe("Tests greeting the user in the language selected.", function () {
 
 
-    it("Should greet the username Ammaar in English.", function () {
-        let greeting = Greet();
-        var userName = "Ammaar"
-        var language = "English";
-        assert.equal(greeting.greetUser( userName,language), "Hello, Ammaar");
-    });
-    it("Should greet the username Thomas in Afrikaans.", function () {
-        let greeting = Greet();
-        var userName = "Thomas"
-        var language = "Afrikaans";
-        assert.equal(greeting.greetUser(userName, language), "Halo, Thomas");
-    });
-    it("Should greet the username John in Xhosa.", function () {
-        let greeting = Greet();
-        var userName = "John";
-        var language = "Xhosa";
-        assert.equal(greeting.greetUser(userName, language), "Molo, John");
-    });
-
-
-
 // describe("Tests if username textbox is empty or if no language is selected.", function () {
 //     it("Should return a message to inform the user to select a language and enter a username.", function () {
 //        // var userMap={Ammaar :1}
