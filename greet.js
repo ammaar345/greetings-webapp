@@ -7,7 +7,10 @@ module.exports = function Greet() {
     });
     var nameMap = {};
     async function addEntry(param) {
-        if (param.name !== '') {
+       
+        if (param !== '') {
+            param=await (param.charAt(0).toUpperCase() + param.toLowerCase().slice(1));
+    
             const INSERT_QUERY = ' insert into users (name,greeted_count) values ($1,1)';
             await pool.query(INSERT_QUERY, [param]);
         }
