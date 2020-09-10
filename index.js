@@ -34,6 +34,7 @@ app.get('/', async function (req, res) {
 app.post("/greeting", async function (req, res) {
 
   var name = req.body.name;
+  var username=await (name.charAt(0).toUpperCase() + name.toLowerCase().slice(1));
   var language = req.body.languageType;
 
   let flash = await greet.flshMsg(name);
@@ -42,7 +43,7 @@ app.post("/greeting", async function (req, res) {
 
   }
   var greeting = await greet.greetUser(name, language);
-  await greet.countGreeted(name);
+  await greet.countGreeted(username);
   
   var counter = await greet.nameCounter();
  
