@@ -1,21 +1,10 @@
 module.exports = function Greet() {
     const pg = require("pg");
     const Pool = pg.Pool;
-    const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greetings-webapp';
+    const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings-webapp';
     const pool = new Pool({
         connectionString
     });
-    var nameMap = {};
-    async function addEntry(param) {
-       
-        if (param !== '') {
-            param=await (param.charAt(0).toUpperCase() + param.toLowerCase().slice(1));
-    
-            const INSERT_QUERY = ' insert into users (name,greeted_count) values ($1,1)';
-            await pool.query(INSERT_QUERY, [param]);
-        }
-    }
-
     //    async function names(userN) {
     //         const userName =await userN.charAt(0).toUpperCase() +await userN.toLowerCase().slice(1)
 
@@ -29,16 +18,26 @@ module.exports = function Greet() {
     //async function greetings (name, language) {
 
 
+    async function addEntry(param) {
+        if (param !== '') {
+          
+            const INSERT_QUERY = ' insert into users (name,greeted_count) values ($1,1)';
+            await pool.query(INSERT_QUERY, [param]);
+        }
+    }
 
-    async function countGreeted(parameter) {
+    
+
+    async function countGreeted(username) {
         const SELECT_QUERY = 'Select name from users where name=$1'
         const UPDATE_QUERY = 'UPDATE users set greeted_count=greeted_count+1  where name=$1 ';
-        const user = await pool.query(SELECT_QUERY, [parameter])
+        const user = await pool.query(SELECT_QUERY, [username])
+       // const charName=(username.charAt(0).toUpperCase() + param.toLowerCase().slice(1))
         if (user.rows.length > 0) {
-            await pool.query(UPDATE_QUERY, [parameter])
+            await pool.query(UPDATE_QUERY, [username])
         }
         else {
-            await addEntry(parameter)
+            await addEntry(username)
         }
 
     }
@@ -50,9 +49,7 @@ module.exports = function Greet() {
             return user.rows[0].greeted_count;
         }
         return 0;
-        // return await nameMap[nameParam.charAt(0).toUpperCase() + await nameParam.toLowerCase().slice(1)]
-
-
+       
     }
     async function greetUser(name, lang) {
         var msg = "";
@@ -68,7 +65,7 @@ module.exports = function Greet() {
             }
 
             else if (lang === "Xhosa") {
-                msg = "Molo, " + user;
+                msg = "Mholo, " + user;
 
             }
         }
