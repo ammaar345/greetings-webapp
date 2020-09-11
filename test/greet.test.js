@@ -8,9 +8,7 @@ describe("Tests greeting the user in the language selected.", function () {
 		connectionString
 	});
 	const INSERT_QUERY = "insert into users (name, greeted_count) values ($1, 1)";
-	const SELECT_QUERY = 'Select name from users where name=$1';
-	const UPDATE_QUERY = 'Update users set greeted_count=greeted_count+1 where name = $1'
-	beforeEach(async function () {
+		beforeEach(async function () {
 		await pool.query("delete from users");
 		after (function(){
 			pool.end()
