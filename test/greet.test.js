@@ -12,6 +12,9 @@ describe("Tests greeting the user in the language selected.", function () {
 	const UPDATE_QUERY = 'Update users set greeted_count=greeted_count+1 where name = $1'
 	beforeEach(async function () {
 		await pool.query("delete from users");
+		after (function(){
+			pool.end()
+		})
 	});
 
 
