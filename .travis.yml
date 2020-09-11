@@ -1,3 +1,16 @@
 language: node_js
 node_js:
   -   12
+env:
+  - DATABASE_URL=postgresql://postgres@localhost:5432/greetings-webapp
+  before_script:
+  - psql -c 'create database  greetings-webapp;' -U postgres
+  - psql -U postgres -d greetings-webapp -a -f tables.sql
+  addons:
+  apt:
+    sources:
+    - precise-pgdg-9.5
+    packages:
+    - postgresql-9.5
+    - postgresql-contrib-9.5
+  postgresql: 9.5
