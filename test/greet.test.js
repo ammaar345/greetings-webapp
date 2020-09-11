@@ -10,9 +10,7 @@ describe("Tests greeting the user in the language selected.", function () {
 	const INSERT_QUERY = "insert into users (name, greeted_count) values ($1, 1)";
 		beforeEach(async function () {
 		await pool.query("delete from users");
-		after (function(){
-			pool.end()
-		})
+	
 	});
 
 
