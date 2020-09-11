@@ -8,7 +8,8 @@ describe("Tests greeting the user in the language selected.", function () {
 		connectionString
 	});
 	const INSERT_QUERY = "insert into users (name, greeted_count) values ($1, 1)";
-
+	const SELECT_QUERY = 'Select name from users where name=$1';
+	const UPDATE_QUERY = 'Update users set greeted_count=greeted_count+1 where name = $1'
 	beforeEach(async function () {
 		await pool.query("delete from users");
 	});
@@ -64,21 +65,21 @@ describe("Tests greeting the user in the language selected.", function () {
 		});
 	})
 	describe("Shows the names being stored in the object.", function () {
-		it(" Should count 2 names in the map.", async function () {
+		it(" Should return 1 name in the list object that was added to the database.", async function () {
 			let greet = Greet()
 			await pool.query(INSERT_QUERY, ['Yolanda'])
-			assert.deepEqual(await greet.getNames(), [{name:"Yolanda"}])
+			assert.deepEqual(await greet.getNames(), [{ name: "Yolanda" }])
 		})
-		it("Should count 4 names in the map. , since the name Ammaar has been added already.", async function () {
+		it("Should return 2 names in the list object that were added to the database.", async function () {
 			let greet = Greet()
 			await pool.query(INSERT_QUERY, ['Tom'])
 			await pool.query(INSERT_QUERY, ['Jerry'])
 			assert.deepEqual(await greet.getNames(), [{
-				name:"Tom"
+				name: "Tom"
 			},
-		{name :"Jerry"}])
+			{ name: "Jerry" }])
 		})
-		it("Should count 1 name in the map.", async function () {
+		it("Should return 4 names in the list object that were added to the database.", async function () {
 			let greet = Greet()
 			await pool.query(INSERT_QUERY, ['Joe'])
 			await pool.query(INSERT_QUERY, ['Lewis'])
@@ -93,4 +94,33 @@ describe("Tests greeting the user in the language selected.", function () {
 			])
 		})
 	})
+	describe("Tests if the counter increases when a name is entered more than once.", function () {
+
+
+		it("Should add Joe to the database and then increase the counter if the name Joe exists after being added.", async function () {
+			let greet = Greet();
+			var userName = "Joe"
+			await greet.countGreeted(userName)
+			await greet.countGreeted(userName)
+			assert.equal(await greet.singleNameCount(userName), 2);
+		});
+		it("Should add Thomas to the database since Thomas is not in the database already.", async function () {
+			let greet = Greet();
+			var userName = "Thomas"
+			await greet.countGreeted(userName)
+			assert.equal(await greet.singleNameCount(userName), 1);
+		});
+		it("Should add the name Unalo to the database if its not there , but after unalo is added to the database the counter should increase 3 more times.", async function () {
+			let greet = Greet();
+			var userName = "Unalo";
+			await greet.countGreeted(userName);
+			await greet.countGreeted(userName);
+			await greet.countGreeted(userName);
+			await greet.countGreeted(userName);
+			assert.equal(await greet.singleNameCount(userName), 4);
+		});
+
+
+	});
+
 })
