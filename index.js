@@ -20,14 +20,11 @@ app.engine('handlebars', exphbs({
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
-
 app.get('/', async function (req, res) {
   var counter = await greet.nameCounter()
   res.render("index", {
     counter
   })
-
 })
 
 app.post("/greeting", async function (req, res) {
@@ -51,7 +48,13 @@ app.post("/greeting", async function (req, res) {
     counter
   })
 })
-
+app.post("/reset",async function(req,res){
+  await greet.clearDB();
+ const counter= await greet.nameCounter ()
+  res.render("index",{
+counter
+  })
+})
 app.get("/greeted", async function (req, res) {
   var names = await greet.getNames()
   res.render("actions", {
@@ -72,7 +75,7 @@ app.get("/counter/:name", async function (req, res) {
   )
 })
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3090;
 app.listen(PORT, function () {
 
   console.log("App started at port:", PORT);

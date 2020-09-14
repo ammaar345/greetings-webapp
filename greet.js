@@ -1,7 +1,7 @@
 module.exports = function Greet() {
     const pg = require("pg");
     const Pool = pg.Pool;
-    const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings_webapp';
+    const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greetings_webapp';
     const pool = new Pool({
         connectionString
     });
@@ -25,6 +25,7 @@ module.exports = function Greet() {
 
     }
 
+    
     async function singleNameCount(nameParam) {
         const SELECT_QUERY = 'Select greeted_count from users where name=$1'
         const user = await pool.query(SELECT_QUERY, [nameParam])
@@ -61,6 +62,11 @@ module.exports = function Greet() {
 
         return users.rows;
     }
+
+ async function clearDB(){
+DELETE_QUERY="delete from users"
+await pool.query(DELETE_QUERY);
+ }
     async function nameCounter() {
         const SELECT_QUERY = 'SELECT id from users';
         const count = await pool.query(SELECT_QUERY);
@@ -74,7 +80,7 @@ module.exports = function Greet() {
     }
     return {
         nameCounter,
-
+        clearDB,
         greetUser,
         getNames,
         flshMsg,
