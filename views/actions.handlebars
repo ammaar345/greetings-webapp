@@ -1,11 +1,15 @@
+<div class="container">
+    <div>
+        <a href="/">back</a>
+    </div>
+    <div class="inline">
+        <ul>{{#each keyName}}
 
-<div>
-    <a href="/">back</a>
+            <li>
+                <a href="/counter/{{this.name}}">{{this.name}}</a>
+            </li>
+            {{/each}}
+
+        </ul>
+    </div>
 </div>
-
-<ul>{{#each keyName}}
-    <li>
-        <a href="/counter/{{this.name}}">{{this.name}}</a>
-    </li>
-    {{/each}}
-</ul

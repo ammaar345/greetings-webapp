@@ -50,10 +50,11 @@ app.post("/greeting", async function (req, res) {
 })
 app.post("/reset",async function(req,res){
   await greet.clearDB();
- const counter= await greet.nameCounter ()
-  res.render("index",{
-counter
-  })
+//  const counter= await greet.nameCounter ()
+//   res.render("index",{
+// counter
+//   })
+res.redirect("/")
 })
 app.get("/greeted", async function (req, res) {
   var names = await greet.getNames()
