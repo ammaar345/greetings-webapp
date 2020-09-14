@@ -3,7 +3,7 @@ const Greet = require("../greet");
 describe("Tests greeting the user in the language selected.", function () {
 	const pg = require("pg");
 	const Pool = pg.Pool;
-	const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings_webapp';
+	const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greetings_webapp';
 	const pool = new Pool({
 		connectionString
 	});
@@ -121,5 +121,31 @@ describe("Tests greeting the user in the language selected.", function () {
 
 
 	});
+	describe("Tests if the database function works properly.", function () {
 
+
+		it("Should clear 3 names from the database.", async function () {
+			let greet = Greet();
+			await pool.query(INSERT_QUERY, ['Joe'])
+			await pool.query(INSERT_QUERY, ['Lewis'])
+			await pool.query(INSERT_QUERY, ['Themba'])
+			await greet.clearDB()
+			assert.deepEqual(await greet.getNames(),[]);
+		});
+		it("Should clear 2 names from the database.", async function () {
+			let greet = Greet();
+			await pool.query(INSERT_QUERY, ['Tom'])
+			await pool.query(INSERT_QUERY, ['Jerry'])
+			await greet.clearDB()
+			assert.deepEqual(await greet.getNames(), []);
+		});
+		it("Should clear 1 name from the database.", async function () {
+			let greet = Greet();
+			await pool.query(INSERT_QUERY, ['Yolanda'])
+			await greet.clearDB()
+			assert.deepEqual(await greet.getNames(), []);
+		});
+
+
+	});
 })
