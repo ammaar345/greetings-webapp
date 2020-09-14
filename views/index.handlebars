@@ -27,21 +27,24 @@
             <input type="radio" name="languageType" class=language value="Afrikaans"> Afrikaans
             <input type="radio" name="languageType" class=language value="Xhosa"> Xhosa
         </div>
-        <div>
+        <div class="col auto space row">
 
             {{greeting}}
         </div>
-        <div>
+        <div class="col auto space row">
             {{counter}}
         </div>
         <div class="row col-auto space button">
-            <input type="submit" class="btnDisplay" value="Greet me ">
+            <input type="submit" class="btn-primary greet " value="Greet me ">
         </div>
 
-    </form>
     <div><a href="/greeted">Users Greeted </a></div>
-    <div class="row col-auto space topMessage msg">
+    <div class="row col-auto space topMessage msg pad">
 
+    </form>
+<form action="/reset" method="POST">
+<input type="submit" class="btn-warning res" value="Reset">
+</form>
     </div>
 
     <script>
