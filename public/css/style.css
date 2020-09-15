@@ -1,7 +1,9 @@
-body{background-color: lavenderblush;
+body{
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-vertical-align: auto;
-font-size: larger;
+background: red;
+/* 
+padding: 5em; */
+
 }
 input[type="radio"]{margin: 0.3em;
 padding: 0.5em;}
@@ -33,18 +35,23 @@ a {color: green;
 text-decoration: none;
 ;}
 .container{
- width: 400px;
+ /* width: 400px;  */
  /* height: 400px; */
- background: #fff;
+ font-size: larger;
+ 
  top: 40%;
  left: 50%;
  position: absolute;
  transform: translate(-50%, -50%);
- box-sizing: border-box;	
- background-color: #87cefa;
- padding:5em;
- padding-left: 3em;
- border-radius: 1.2EM;
+background-color: grey;
+
+ box-sizing:inherit;
+ /* background-color: #87cefa; */
+  padding:5em; 
+ /*padding-right: 2em;
+ 
+  padding-left: 3em;  */
+ border-radius: 0.2EM;
 }
 
 .entry{color:red}
