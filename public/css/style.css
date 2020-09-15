@@ -3,6 +3,8 @@ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 vertical-align: auto;
 font-size: larger;
 }
+input[type="radio"]{margin: 0.3em;
+padding: 0.5em;}
 /* h1{ 
 padding-left: 15em;} */
 .space{
