@@ -31,7 +31,7 @@ border: violet 1px solid;} */
 ul{text-decoration: none;
 list-style:none;
 }
-a {color: green;
+a {color: white;
 text-decoration: none;
 ;}
 .container{
@@ -43,7 +43,7 @@ text-decoration: none;
  left: 50%;
  position: absolute;
  transform: translate(-50%, -50%);
-background-color: grey;
+background-color: lightblue;
 
  box-sizing:inherit;
  /* background-color: #87cefa; */
