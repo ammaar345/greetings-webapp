@@ -11,35 +11,39 @@
                 {{messages.info}}
             </div>
             {{/if}}
-        <div class="space topMessage ">
+        <div class="row mt-2" >
             <label for="nameOfUser">Name</label>
-            <input type="text" name="name" class="nameOfUser " placeholder="Enter your name">
+            <input type="text" name="name" class=" mt-" placeholder="Enter your name">
         </div>
-        <div class="col-auto space row">
+        <div class="row mt-4">
 
             <input type="radio" name="languageType" class=language value="English" checked> English
             <input type="radio" name="languageType" class=language value="Afrikaans"> Afrikaans
             <input type="radio" name="languageType" class=language value="Xhosa"> Xhosa
         </div>
-        <div class="col auto space row">
+        <div class="row mt-3">
 
             {{greeting}}
         </div>
-        <div class="col auto space row">
+        <div class="row mt-3">
             {{counter}}
         </div>
-        <div class="row col-auto space button">
-            <input type="submit" class="btn-primary greet " value="Greet me ">
+        <div class="row mt-3">
+            <input type="submit" class="btn-primary rad " value="Greet me ">
         </div>
-
-    <div><a href="/greeted">Users Greeted </a></div>
-    <div class="row col-auto space topMessage msg pad">
-
-    </form>
+         <div class="row mt-3">
+     <a href="/greeted">Users Greeted </a>
+ </div>
+    
 <form action="/reset" method="POST">
-<input type="submit" class="btn-warning res" value="Reset">
+<div class="row mt-3">
+    
+<input type="submit" class="btn-warning rad" value="Reset">
+</div>
 </form>
-    </div>
+   
+    </form>
+
 
     <script>
 
