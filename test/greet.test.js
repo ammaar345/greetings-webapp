@@ -37,6 +37,20 @@ describe("Tests greeting the user in the language selected.", function () {
 			await pool.query(INSERT_QUERY, ['Tom'])
 			await pool.query(INSERT_QUERY, ['Jennifer'])
 			assert.equal(await greet.nameCounter(), 6)
+
+			it("Should count 1 name in the database , since the name Ammaar is already in the database.", async function () {
+				let greet = Greet()
+				await pool.query(INSERT_QUERY, ['Ammaar'])
+				await pool.query(INSERT_QUERY, ['ammaar'])
+				assert.equal(await greet.nameCounter(), 1)
+			})
+			it("Should count 2 names in the database since the name Lucy is already in the database.", async function () {
+				let greet = Greet()
+				await pool.query(INSERT_QUERY, ['Lucy'])
+				await pool.query(INSERT_QUERY, ['lucy'])
+				await pool.query(INSERT_QUERY, ['John'])
+				assert.equal(await greet.nameCounter(), 2)
+			})
 		})
 		describe("Tests greeting the user in the correct language selected.", function () {
 

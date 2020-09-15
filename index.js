@@ -5,7 +5,13 @@ const app = express();
 const Greet = require("./greet");
 const flash = require('express-flash');
 const session = require('express-session');
-const greet = Greet();
+const pg = require("pg");
+const Pool = pg.Pool;
+const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings_webapp';
+const pool = new Pool({
+    connectionString
+});
+const greet = Greet(pool);
 app.use(session({
   secret: "<add a secret string here>",
   resave: false,
@@ -21,7 +27,7 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.get('/', async function (req, res) {
-  var counter = await greet.nameCounter()
+  const counter = await greet.nameCounter()
   res.render("index", {
     counter
   })
@@ -29,19 +35,19 @@ app.get('/', async function (req, res) {
 
 app.post("/greeting", async function (req, res) {
 
-  var name = req.body.name;
-  var username=await (name.charAt(0).toUpperCase() + name.toLowerCase().slice(1));
-  var language = req.body.languageType;
+  const name = req.body.name;
+  const username=await (name.charAt(0).toUpperCase() + name.toLowerCase().slice(1));
+  const language = req.body.languageType;
 
   let flash = await greet.flshMsg(name);
   if (flash) {
     req.flash("info", "Enter a name")
 
   }
-  var greeting = await greet.greetUser(name, language);
+  const greeting = await greet.greetUser(name, language);
   await greet.countGreeted(username);
   
-  var counter = await greet.nameCounter();
+  const counter = await greet.nameCounter();
  
   res.render("index", {
     greeting: greeting,
@@ -50,14 +56,10 @@ app.post("/greeting", async function (req, res) {
 })
 app.post("/reset",async function(req,res){
   await greet.clearDB();
-//  const counter= await greet.nameCounter ()
-//   res.render("index",{
-// counter
-//   })
 res.redirect("/")
 })
 app.get("/greeted", async function (req, res) {
-  var names = await greet.getNames()
+  const names = await greet.getNames()
   res.render("actions", {
     keyName: names
   })
@@ -66,8 +68,8 @@ app.get("/greeted", async function (req, res) {
 
 app.get("/counter/:name", async function (req, res) {
 
-  var name = req.params.name;
-  var nameCount = await greet.singleNameCount(name);
+  const name = req.params.name;
+  const nameCount = await greet.singleNameCount(name);
 
   res.render("greet", {
     name,
