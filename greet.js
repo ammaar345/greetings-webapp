@@ -1,4 +1,4 @@
-module.exports = function Greet() {
+module.exports = function Greet(pool) {
     async function addEntry(param) {
         if (param !== '') {
 
