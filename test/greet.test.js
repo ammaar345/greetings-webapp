@@ -3,7 +3,7 @@ const Greet = require("../greet");
 describe("Tests greeting the user in the language selected.", function () {
 	const pg = require("pg");
 	const Pool = pg.Pool;
-	const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greetings_webapp';
+	const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings_webapp';
 	const pool = new Pool({
 		connectionString
 	});
