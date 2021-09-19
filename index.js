@@ -24,10 +24,11 @@ app.engine('handlebars', exphbs({
   layoutsDir: './views/layouts'
 }));
 app.use(express.static("public"))
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(urlencoded({ extended: false }))
+app.use(json())
 app.get('/', async function (req, res) {
   const counter = await greet.nameCounter()
+  console.log(connectionString);
   res.render("index", {
     counter
   })
