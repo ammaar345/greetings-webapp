@@ -5,22 +5,18 @@ const app = express();
 const Greet = require("./greet");
 const flash = require('express-flash');
 const session = require('express-session');
-const pg = require("pg");
-const Pool = pg.Pool;
-const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings_webapp?ssl=true';
-// var client = new pg.Client({
-//   user: "admin",
-//   password: "codex123",
-//   database: "Greet",
-//   port: 5432||process.env.PORT ,
-//   host: "localhost",
-//   ssl: true
-  
-// }); 
-// client.connect();
-const pool = new Pool({
-    connectionString
+const { Client } = require('pg');
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
+
+client.connect();
+
+
+const connectionString = process.env.DATABASE_URL || "pg://sneakygoblin:codex123@localhost:5432/greetings_webapp?ssl=true";
 const greet = Greet(pool);
 app.use(session({
   secret: "<add a secret string here>",
