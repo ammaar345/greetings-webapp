@@ -7,7 +7,17 @@ const flash = require('express-flash');
 const session = require('express-session');
 const pg = require("pg");
 const Pool = pg.Pool;
-const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings_webapp';
+const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/greetings_webapp?ssl=true';
+// var client = new pg.Client({
+//   user: "admin",
+//   password: "codex123",
+//   database: "Greet",
+//   port: 5432||process.env.PORT ,
+//   host: "localhost",
+//   ssl: true
+  
+// }); 
+// client.connect();
 const pool = new Pool({
     connectionString
 });
@@ -24,11 +34,10 @@ app.engine('handlebars', exphbs({
   layoutsDir: './views/layouts'
 }));
 app.use(express.static("public"))
-app.use(urlencoded({ extended: false }))
-app.use(json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.get('/', async function (req, res) {
   const counter = await greet.nameCounter()
-  console.log(connectionString);
   res.render("index", {
     counter
   })
