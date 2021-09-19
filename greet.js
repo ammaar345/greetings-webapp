@@ -10,11 +10,12 @@ module.exports = function Greet(pool) {
         const SELECT_QUERY = 'Select name from users where name=$1'
         const UPDATE_QUERY = 'UPDATE users set greeted_count=greeted_count+1  where name=$1 ';
         const user = await pool.query(SELECT_QUERY, [username])
-        if (user.rows.length > 0) {
-            await pool.query(UPDATE_QUERY, [username])
+        if (user.rows.length === 0) {
+            await addEntry(username)
+          
         }
         else {
-            await addEntry(username)
+            await pool.query(UPDATE_QUERY, [username]) 
         }
 
     }
