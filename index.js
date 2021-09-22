@@ -6,7 +6,7 @@ const Greet = require("./greet");
 const flash = require('express-flash');
 const session = require('express-session');
 const { Client } = require('pg');
-const connectionString = process.env.DATABASE_URL || "postgresql://sneaky:codex123@localhost:5432/greetings_webapp?ssl=true";
+const connectionString = process.env.DATABASE_URL || "postgresql://sneaky:codex123@localhost:5432/greetings_webapp?";
 
 const client = new Client({
   connectionString,
@@ -15,10 +15,11 @@ const client = new Client({
   }
 });
 
-// client.connect();
 
 
 const greet = Greet(client);
+
+client.connect(); 
 app.use(session({
   secret: "<add a secret string here>",
   resave: false,
